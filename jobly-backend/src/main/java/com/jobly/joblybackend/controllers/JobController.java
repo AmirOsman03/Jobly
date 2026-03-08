@@ -18,8 +18,7 @@ public class JobController {
 
     @GetMapping
     public List<Job> getAllJobs(
-            @RequestParam(required = false) String location,
-            @RequestParam(required = false) String skill
+            @RequestParam(required = false) String location
     ) {
         if (location != null) {
             return jobService.getJobsByLocation(location);

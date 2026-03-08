@@ -14,8 +14,10 @@ public class Job {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "TEXT")
     private String title;
 
+    @Column(columnDefinition = "TEXT")
     private String company;
 
     private String location;
@@ -26,6 +28,7 @@ public class Job {
 
     private LocalDate validUntil;
 
+    @Column(columnDefinition = "TEXT", unique = true)
     private String url;
 
     public Job() {}
