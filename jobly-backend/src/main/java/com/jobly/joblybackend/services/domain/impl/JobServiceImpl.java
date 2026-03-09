@@ -4,6 +4,7 @@ import com.jobly.joblybackend.exceptions.InvalidJobIdException;
 import com.jobly.joblybackend.models.entities.Job;
 import com.jobly.joblybackend.repositories.JobRepository;
 import com.jobly.joblybackend.services.domain.JobService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,8 +35,19 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    @Transactional
     public Job save(Job job) {
-        return jobRepository.save(job);
+        return jobRepository.findByUrl(job.getUrl())
+                .map(existingJob -> {
+                    existingJob.setTitle(job.getTitle());
+                    existingJob.setCompany(job.getCompany());
+                    existingJob.setLocation(job.getLocation());
+                    existingJob.setSalary(job.getSalary());
+                    existingJob.setSource(job.getSource());
+                    existingJob.setValidUntil(job.getValidUntil());
+                    return jobRepository.save(existingJob);
+                })
+                .orElseGet(() -> jobRepository.save(job));
     }
 
     @Override

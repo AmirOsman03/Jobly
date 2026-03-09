@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface JobRepository extends JpaRepository<Job, Long> {
@@ -13,6 +14,6 @@ public interface JobRepository extends JpaRepository<Job, Long> {
 
     List<Job> findByLocationIgnoreCase(String location);
 
-    List<Job> findByCompanyIgnoreCase(String company);
+    Optional<Job> findByUrl(String url);
 
 }
