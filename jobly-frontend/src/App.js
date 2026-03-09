@@ -1,11 +1,13 @@
 import React from 'react';
 import Home from "./pages/Home";
+import {CssBaseline} from "@mui/material";
 
 const App = () => {
     return (
-        <div className={"App"}>
+        <>
+            <CssBaseline/>
             <Home/>
-        </div>
+        </>
     );
 };
 

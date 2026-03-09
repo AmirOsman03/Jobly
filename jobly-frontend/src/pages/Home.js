@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {getJobs} from "../services/jobService";
-import JobLIst from "../components/JobLIst";
+import JobList from "../components/JobList";
+import {Container, Typography} from "@mui/material";
 
 const Home = () => {
     const [jobs, setJobs] = useState([]);
@@ -18,10 +19,12 @@ const Home = () => {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div>
-            <h1>Active Jobs</h1>
-            <JobLIst jobs={jobs}/>
-        </div>
+        <Container sx={{ py: 5 }}>
+            <Typography variant="h4" gutterBottom>
+                Active Jobs
+            </Typography>
+            <JobList jobs={jobs} />
+        </Container>
     );
 };
 
