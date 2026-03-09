@@ -35,7 +35,17 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Job save(Job job) {
-        return jobRepository.save(job);
+        return jobRepository.findByUrl(job.getUrl())
+                .map(existingJob -> {
+                    existingJob.setTitle(job.getTitle());
+                    existingJob.setCompany(job.getCompany());
+                    existingJob.setLocation(job.getLocation());
+                    existingJob.setSalary(job.getSalary());
+                    existingJob.setSource(job.getSource());
+                    existingJob.setValidUntil(job.getValidUntil());
+                    return jobRepository.save(existingJob);
+                })
+                .orElseGet(() -> jobRepository.save(job));
     }
 
     @Override

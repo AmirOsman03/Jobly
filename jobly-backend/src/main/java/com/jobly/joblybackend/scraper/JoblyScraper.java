@@ -63,9 +63,7 @@ public class JoblyScraper {
                     jobUrl
             );
 
-            if (!jobService.existsByUrl(jobUrl)) {
-                jobService.save(job);
-            }
+            jobService.save(job);
         }
     }
 }

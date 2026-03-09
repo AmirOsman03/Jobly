@@ -13,7 +13,7 @@ public class JoblyScheduler {
         this.joblyScraper = joblyScraper;
     }
 
-    @Scheduled(fixedRate = 10 * 60 * 1000)
+    @Scheduled(fixedRate = 5 * 60 * 1000)
     public void runScraper() {
         try {
             joblyScraper.scrapeVrabotuvanjeMK();
